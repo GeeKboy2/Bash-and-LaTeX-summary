@@ -1,0 +1,372 @@
+In Gnome use (ALT + F2) then type "gnome-terminal" to open the terminal
+
+Dans le shell :
+       (kill)   CTRL + K : TresTresLo¦ngMot --> TresTresLo____ coupe la driote du curseur
+       (yank)   CTRL + Y : insère les txt précédemment coupé
+                CTRL + A : aller à debut ligne
+                CTRL + E : aller à fin ligne
+                CTRL + Z : Endort le processus en cours (comme firefox qui nous ne donne plus la main)
+                CTRL + C : Termine le processus en cours (comme firefox qui nous ne donne plus la main)
+                
+                CTRL + N : Clear command input section
+                CTRL + L : Clear
+                
+                
+                
+Notion à connaitre :
+               CMD1 ; CMD2 ; CMD3 : commandes en serie (peut chnager le repertoire courant !!)
+               (CMD1 ; CMD2)      : Execute dans un sous shell et affiche le résultat (sans changer le repertoire courant !!)
+               CMD1 ¦¦ CMD2       : CMD1 ou CMD2 (commence par CMD1 si elle marche il n'affiche pas CMD2)
+               CMD1 && CMD2       : CMD1 et et CMD2
+               CMD1 & CMD2        : Met souvent CMD1 en background et execute CMD2
+               CMD1 ¦ CMD2        : rediriger le processus vers un autre processus
+               [ (cd .. ; ls) = ls .. != cd .. ; ls ] Repertoire de fin !!
+               [firefox & ] Lancée en tache de fond
+               ¦ : pipe
+               & : et
+  
+
+OP = OPTION
+CMD = COMMAND
+REP = REPERTOIRE
+ARCH = ARCHIVE
+
+
+clear          : Vider le terminal (CTRL + L)
+exit           : Fin de session (CTRL + D)
+help           : Afficher une liste des commandes shell
+help CMD       : Afficher une courte description de la CMD
+history        : Affiche 500 dernières commandes que vous avez saisies (bash) 
+                    CTRL + R               : chercher dans history par mots clés
+                    CTRL + P / fleche haut : commande précédente
+                    CTRL + N / fleche bas  : commande suivante
+                    !num                   : Relance la commande respective au num dans history
+man OP SUJET   : Ouvre le manuel à propos du SUJET ; (q pour quitter)
+                 / : pour cherche des mot clés dans le man
+                 il contient 10 domaines (OP):
+                          1 Commandes utilisateur
+                          2 Appel système
+                          3 Fonctions du langage de programmation C
+                          4 Fichiers spécifiques
+                          5 Formats de fichier
+                          6 Jeux
+                          7 Divers
+                          8 Commandes pour l’administration du système
+                          9 Fonctions cœur ( noyau Linux )
+                         10 Nouvelles commandes
+whatis CMD     : Short describtion of the command
+cd OP REP      : Navigation dans l’arborescence des répertoires
+cd-            : Passe au répertoires précédent
+cd ..          : Repertoire parent
+cd .           : Repertoire courant
+cd / cd ~      : Home directory
+ls OP REP      : Liste du contenu de l’annuaire ( noms fichers et dossiers )
+ls OP          : Liste du contenu du répertoire actuel
+                  OP : -reverse / -r  : affiche en inverse
+                       -l             : affiche version longue
+                       -all / -a      : affiche tout (les repertoire et les fichers .__)
+                       -t             : time order
+                       -G             : __________________________________________________________________________________________________
+                       -d             : nom rep ___________________________________________________________________________________________
+                       [ls -l FILE : le proprietaire du fichier]
+whoami         : user                   
+pwd OP         : Emission du nom de répertoire actuel ( print working directory )
+date           : Date et heure courante
+cal            : calendrier
+cal 2022
+cal 10 2022
+who            : Who is logged on
+uname OP       : Sys D'exploitation (SE)
+                  OP : -a : pour plus d'infosur le SE
+uptime         : how long has the pc been running for
+top            : Procesus that are running by the order of memory consumption (gestionnaire de tache) ; (q pour quitter)
+time  TACHE    : Chronometre une tache (ex : time firefox)
+sleep 5        : Suspension de 5 secondes
+jobs           : Mentre les processus en cours avec des num respectif
+bg [num]       : Met en BackGround le processus avec num dans jobs
+fg [num]       : Met en FrontGround le processus avec num dans jobs
+ps / echo $!   : afficher les PID
+kill -KILL pid : Terminer un processus specifique 
+file FILE      : Determine le type du ficher 
+cp OP FILE DIR : Copy fichier (va laisser des enfants orfelins) 
+                     OP : -r   : DeepCopy fichier et son contenu
+                     [cp FILE NewFILE : chnage le nom du fichier en le copiant dans la place du NewFILE qui n'existais pas avant]
+mkdir OP DIR   : Make Directories 
+                     OP : -p : creer directory parent
+rmdir DIR      : Supprimer des directories
+mv FILE NewFILE: Move (rename) files 
+rm OP DIR      : Remove files or directories 
+                     OP : -r : DeepDelete 
+                          -f : Forcer la suppression (dangereux à ne pas faire)
+touch          : Change file timestamps ; crée le fichier s'il n'existe pas
+                     Create file
+cat FILE       : Shows the entire contant of a file (even if it is 2 pages) 
+                     Concatenate files and print on the standard output (affiche contenu du fichier)
+less FILE      : Affiche un fichier avec possibilité de le parcourir (fleche bas ou fleche haut pour naviguer ligne par ligne)
+more FILE      : Affiche le contenu du fichier (page par page) use space to navigate q to leave
+wc OP FILE    |: print newline , word , and byte counts for each file 
+                     OP : -w : words
+                          -l : lines
+                          -c : bytes
+chmod DROIT FILE : Change file mod bits ; chnager le droit d'utilisateur 
+                      u : user 
+                      g : groupe
+                      o : other
+                      a : all (=ogu)
+                        rwx rwx rwx
+                      - --- --- ---
+                      t  u   g   o
+                      t : type de fichier
+                            - : fichier regulier
+                            d : repertoire 
+                            l : lien symbolique
+                            s : socket
+                     chmod  u+rw,g+r,o+r
+                             6   4    4   en binaire (rwx = 111² = 7)
+                            u=rw,go=r
+                            o=r,u+w
+chown OwnerName FILE : chnage ownership of a file
+                      -R : recursive
+chgrp GrpName FILE   : change group ownership of a file 
+                      -R : recursive
+
+_______________________________________________________________________ Substitution et variables ___________________________________________
+
+a{b,c,d}e = abe ace ade
+
+Var=X affecte au nom
+$Var acceder à la valeur
+
+$VAR : acceder à la valeur de la variable
+${VAR} : acceder à la valeur de la variable mais en la separant du texte qui suit 
+              (${VAR}IATION : et on peut remplacer ${VAR} par AV pour avoir aviation)
+${VAR:-défaut} : donne valeur defaut à la variable si elle n'est pas definit
+
+$PATH : Les chemin traversée pour executer le code
+$HOME : home directory
+
+export VAR=value (la variable est accesible à l'environement = elle est connus en sortant d'un sous shell fils)
+VAR=value  (perdus en sortant d'un sous shell (;) fils)
+
+'$CHAR' : pas d’interprétation du contenu
+"$CHAR" : interprétation du contenu et remplace CHAR par sa valeur
+* : n’importe quelle chaîne
+? : n’importe quel caractère
+[a-c1-35] : [a,b,c,1,2,3,5]
+
+       
+________________________________________________________________ Entrée sortie _____________________________________________________________
+< FILE : redirection de l’entrée standard dans un fichier
+> FILE : redirection de la sortie standard dans un fichier (déjà vu)
+> > : idem, avec positionnement à la fin du fichier s’il existe
+cmd | cmd : le pipe (déjà vu)
+2> FILE : redirige la sortie d’erreur vers file
+2>&1 : fusionne la sortie d’erreur sur le sortie standard
+[commands > FILE 2>&1 : lie la sortie1 et sortie d'erreur 2 et les envoie dans le fichier FILE]
+
+_______________________________________________________________________ Alias ________________________________________________________
+ 
+ 
+ alias ll='ls -la' : creates a new command but desapears at the next restart of the program
+ # to keep the alias you have to go to the file .bashrc and write it there
+
+
+___________________________________________________________________ Compression ________________________________________________
+c=create
+t=test
+x=extract
+j,z=compression mode
+f=archive name
+v=(affiche liste comme -l) 
+
+tar -cvf ARCH DIR : put the DIR in the ARCHIVE
+tar -tvf ARCH     : show the content of the ARCH
+tar -xvf ARCH     : extract the ARCH
+
+( gzip [.tar.tgz] )
+tar -cvzf ARCH DIR: Compress in gzip type
+tar -xvzf ARCH    : extract a gzip ARCH
+
+( bzip2 [.tar.tbz] )
+tar -cvjf ARCH DIR: Compress in bzip2
+tar -xvjf ARCH    : extract a bzip2 ARCH
+
+OP = -h   # human readable form (Giga,Kilo,Mega)
+df .              : Harddrive curent partition size
+du -c DIRs        : The size of each directory inside each DIR (recursivly) and then the total
+du -s DIRs        : The total size of each DIR 
+
+
+
+______________________________________________________________________________Complex__________________________
+grep STR FILE|: rechercher le motif STR dans FILE 
+              OP : -i : ignore casse (majiscule et minuscule)
+                   -n : affiche aussi le numero de la ligne du FILE
+                   -v : affiche les lignes ne contenant pas le STR
+                   -R : recherche récursive dans les répertoire
+                   -c : Number of appearences of STR (pattern)
+                   [ | grep "^motif\b"] the lines where motif is the first word / \b means the end of the word
+                   [grep Motif -d ":" -f n FILE] _____________________________________________________________
+                   [grep -v "^$" FILE] ^ debut de ligne / $ fin de ligne / le programme supprime les ligne vides
+                   [grep -E "word1|word2|word3"]=[egrep "word1|word2|word3"] shows the lines that contain word1 or 2 or 3
+sort OP FILE|: trie les lignes dans l'ordre alphabetique
+                -r : reverse sort
+                -k2: sort by the second collumn (field)
+                -h : human readable (Giga > Mega)
+uniq        |: trie les doublons (use sort before uniq)
+               -c : number of occurences
+               -d : only shows repeated lines
+head -n FILE : extraction des n premieres lignes
+tail -n FILE : extraction des n derniere lignes
+awk         |: decoupe une chaine de caracteres en fonction des delimiteurs (les delimiteur sont connus de bash grace à la variable IFS)
+               (combine les séparateur proche)
+               -F : delimiter
+               [ | awk -F ":" '{ print $1,$NF "text" }'] $NF is the last field with the : delimiter
+               [awk '/word/ {print}' FILE] print the lines that have 'word' in them
+               [echo 'Hello Tom' | awk '{$2="Adam" ; print $0}'] replaces second element with adam (Hello Adam) / $0 means whet ever it finds
+               [awk 'length($0)>15' FILE] the lines that have more than 15 elements.
+               [| awk '{if($9 == "word") print $0;}'] if the 9th section is 'word' print the entire line
+               [| awk '{print NF}'] print number of fields for each line
+tr           : remplacement de caracteres
+               [tr "[:LOWER]" "[:UPPER]"] from lowercase to uppercase
+sed          : remplacement de motif (only what you see , does not modify the real file)
+                     -i : modify the file
+               [sed 's/root/r00t/g' FILE] replace the motif root by r00t in FILE / s means substitute / g means global = all the words 
+               [sed -i 's/root//g' FILE] delete the word root in FILE
+               [sed '/word/d' FILE] delete the lines that have the word 'word' / d means delete
+               [sed '/^$/d' FILE] delete empty lines
+               [sed '1,2d' FILE] delete the first 2 lines
+               [sed 's/\t/ /g' FILE] replace tabs with spaces / \t means tab
+               [sed -n 12,18p FILE] show the lines from 12 to 18 / p means pick
+               [sed 12,18d FILE] deletes the lines from 12 to 18 and shows the rest
+               [sed G FILE] adds an empty line after each line
+               [sed '8!s/word1/word2/' FILE] replaces in all the lines word1 by word2 except line 8
+cut OP FILE |: selection par colonne (combine pas les separateur)
+                     -c        : characters [cut -c1,2 FILE : first and second character of each line][cut -c1-3 FILE : first 3 characters]
+                     -d "CHAR" : delimiteur de colonnes CHAR
+                     -f n      : n-ieme collones
+                     [cut -d ":" -f 6 /etc/passwd] la collone 6 en separant par :
+                     
+                     
+____________________________________________________________ Script Shell _________________________________________________________
+
+emacs script.sh &
+#start your script with the shebang "#!/bin/bash" that you get from the command 'which bash'
+chmod 700 script.sh
+./script.sh #to execute
+
+./script.sh
+$#   : le nombre d’éléments courant dans le vecteur
+$1..$9 : accès au premier, deuxième, . . . neuvième
+$*   : liste de tous les éléments
+$0   : le nom de la commande courante
+$?   : valeur de retour de la dernière commande
+$$   : pid de la commande courante
+shift: shift all the arguments to the left = remove the first
+
+test arg_1 arg_2 ... OR test [ arg_1 arg_2 ... ] : 
+#We can test
+-e chemin : si chemin est un fichier existant
+-f chemin : existant et fichier ordinaire
+-d chemin : existant et répertoire
+-r chemin : existant et access lecture
+-w chemin : existant et access écriture
+-x chemin : existant et access écriture
+
+#tester chaines char
+ch1 = ch2
+ch1 != ch2
+
+#tester nombres
+n1 -eq n2 : =
+n1 -ne n2 : !=
+n1 -gt n2 : >
+n1 -ge n2 : ≥
+n1 -lt n2 : <
+n1 -le n2 : ≤
+
+---------------------- If
+if [ "$USER" = "$1" ] #char
+then   CMD
+elif [ $count -ne 100 ] #nombres
+then   CMD
+else
+       CMD
+fi
+
+#Remarque : c'est possible de tout ecrire sur une meme ligne "if [] ; then CMD ; elif ....."
+
+----------------------- Case
+case $INPUT_STRING in
+	hello)
+		echo "Hello yourself!"
+		;;
+	bye)
+		echo "See you again!"
+		break
+		;;
+	*) # anything else
+		echo "Sorry, I don't understand"
+		;;
+  esac
+  
+----------------------- For
+for I in 1 2 3 4 5
+do
+       CMD
+done
+
+for file in /etc/*
+do
+       CMD
+done
+
+----------------------- While
+while [ condition ]
+do
+	CMD
+done
+
+-----------------------
+continue : jump to next iteration
+break    : leave the iteration (for or while)
+exit[0]  : leave the entire script with code 0
+-----------------------
+
+----------------------- Function
+function()
+{
+       x=$1       #$1=arg1
+       return 2
+}
+
+function arg1 arg2 arg3
+--------------------------------------
+set -x : shows the execution details
+                   
+                    
+______________________________________________________________ Aditions ______________________________________________________
+
+find DIR -name "DirName" : find in DIR the directory DirName/FileName (recursive) and gives the path
+locate DIR               : gives the path to the DIR
+diff FILE1 FILE2         : compare files line by line
+cmp  FILE1 FILE2         : compare files byte by byte
+vi FILE                  : Create file and immidiatly start writing in it in the bash (Esc + wd! : to quit the edit window)
+last                     : The logged in users history (use [last | more] to see better)
+w                        : works like who but gives more info about the users
+finger                   : ___________________________________________________________
+id USER                  : BY default not typing user gives info about you (your id , the groups you're in etc)
+users                    : find the users who are logged in
+wall                     : send a message to all the users (follow by CTRL + D to send the message)
+write USER               : send a message to a specific user
+bc                       : binary calculator (bc ENTER 2+2)
+which CMD                : where the command is located
+let 			 : _________________________________________________________________
+
+
+
+
+
+
+
+
